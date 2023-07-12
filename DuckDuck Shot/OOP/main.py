@@ -1,22 +1,32 @@
 import pygame
 from screen import Screen
 from surface import Surface
+from cloud import Cloud
+from generator import Generator
+from settings import *
 
 pygame.init()
 screen = Screen()
 
 # ============= Surface Assets ===============
-wood_bg = Surface("./assets/images/Wood_BG.png", screen)
+wood_bg = Surface("./assets/images/Wood_BG.png", screen, 0, 0)
 
-land_bg = Surface("./assets/images/Land_BG.png", screen)
-land_bg.make_animable_y(480, 500, 460, 0.3)
-water_bg = Surface("./assets/images/Water_BG.png", screen)
-water_bg.make_animable_y(420, 450, 390, 0.6)
+land_bg = Surface("./assets/images/Land_BG.png", screen, 0, 480)
+land_bg.make_animable_y(500, 460, 0.3)
+water_bg = Surface("./assets/images/Water_BG.png", screen, 0, 420)
+water_bg.make_animable_y(450, 390, 0.6)
 
-cloud_1 = Surface("./assets/images/Cloud1.png", screen)
-cloud_1.make_animable_x(100, 112, 97, 0.2)
-cloud_2 = Surface("./assets/images/Cloud2.png", screen)
-cloud_2.make_animable_x(500, 510, 490, 0.2)
+cloud_1 = Cloud("./assets/images/Cloud1.png", screen, 0, 0)
+clouds_list_1 = Generator(cloud_1, NUM_OF_CLOUDS).gen_game_objects()
+cloud_2 = Cloud("./assets/images/Cloud2.png", screen, 0, 0)
+clouds_list_2 = Generator(cloud_2, NUM_OF_CLOUDS).gen_game_objects()
+
+# FIXME:
+#    1. Here cloud on the list has NoneValue of cors. Investigate why.
+clouds_list = clouds_list_1 + clouds_list_2
+
+# cloud_2.make_animable_x(500, 510, 490, 0.2)
+# cloud_1.make_animable_x(100, 112, 97, 0.2)
 
 
 while True:
@@ -25,11 +35,13 @@ while True:
         if event.type == pygame.QUIT:
             screen.quit_game()
 
-    wood_bg.display_surface(0, 0)
-    water_bg.animate_y(0)
-    land_bg.animate_y(0)
-    cloud_1.animate_x(60)
-    cloud_2.animate_x(120)
+    wood_bg.display_surface()
+    water_bg.animate_y()
+    land_bg.animate_y()
+    # for cloud in clouds_list:
+    #     cloud.display_surface()
+    # cloud_1.animate_x(60)
+    # cloud_2.animate_x(120)
 
     pygame.display.update()
     screen.set_clock(120)
