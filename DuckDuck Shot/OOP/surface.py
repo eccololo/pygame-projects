@@ -22,8 +22,11 @@ class Surface:
         self.animation_min_x = None
         self.animation_speed_x = None
 
-    def display_surface(self):
-        self.screen.get_screen().blit(self.surface, (self.x_cor, self.y_cor))
+    def display_surface(self, surface_obj=None):
+        if surface_obj:
+            self.screen.get_screen().blit(surface_obj, (surface_obj.x_cor, surface_obj.y_cor))
+        else:
+            self.screen.get_screen().blit(self.surface, (self.x_cor, self.y_cor))
 
     def make_animable_y(self, animation_max_y, animation_min_y, animation_speed_y):
         self.animation_start_y = self.y_cor
