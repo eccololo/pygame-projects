@@ -17,5 +17,6 @@ while True:
 
     screen.fill((45, 48, 51))
     spaceship_group.draw(screen)
+    spaceship_group.update()
     pygame.display.update()
     clock.tick(120)
