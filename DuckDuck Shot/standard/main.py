@@ -39,6 +39,7 @@ def update_game_time():
 
 
 def quit_game():
+    pygame.display.quit()
     pygame.quit()
     sys.exit()
 
@@ -175,13 +176,13 @@ while True:
         GAME_WON = True
         clear_game_objects()
         screen.blit(game_win_surface, (int(SCREEN_WIDTH / 2) - 150, int(SCREEN_HEIGHT / 2) - 40))
-        if timer_counter % (120 * 10) == 0:
+        if timer_counter % (120 * 5) == 0:
             quit_game()
 
     if IS_GAME_OVER:
         clear_game_objects()
         screen.blit(game_over_surface, (int(SCREEN_WIDTH / 2) - 190, int(SCREEN_HEIGHT / 2) - 40))
-        if timer_counter % (120 * 10) == 0:
+        if timer_counter % (120 * 5) == 0:
             quit_game()
 
     pygame.display.update()
