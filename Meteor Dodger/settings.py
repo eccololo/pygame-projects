@@ -1,0 +1,1 @@
+METEORS_NUM = 3
