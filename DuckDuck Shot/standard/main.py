@@ -1,19 +1,7 @@
 import pygame
 import sys
 import random
-
-SCREEN_WIDTH = 1020
-SCREEN_HEIGHT = 600
-NUM_OF_DUCKS = 3
-MAX_NUM_OF_DUCKS = 15
-NUM_OF_CLOUDS = 9
-GAME_LEVEL = 1
-MAX_GAME_LVL = 15
-GAME_LEVEL_START_TIME = 3
-GAME_LEVEL_UPDATE_TIME = GAME_LEVEL_START_TIME
-IS_NEXT_LVL = False
-IS_GAME_OVER = False
-GAME_WON = False
+from settings import *
 
 
 def gen_ducks(game_lvl):
@@ -51,6 +39,7 @@ def update_game_time():
 
 
 def quit_game():
+    pygame.display.quit()
     pygame.quit()
     sys.exit()
 
@@ -187,13 +176,13 @@ while True:
         GAME_WON = True
         clear_game_objects()
         screen.blit(game_win_surface, (int(SCREEN_WIDTH / 2) - 150, int(SCREEN_HEIGHT / 2) - 40))
-        if timer_counter % (120 * 10) == 0:
+        if timer_counter % (120 * 5) == 0:
             quit_game()
 
     if IS_GAME_OVER:
         clear_game_objects()
         screen.blit(game_over_surface, (int(SCREEN_WIDTH / 2) - 190, int(SCREEN_HEIGHT / 2) - 40))
-        if timer_counter % (120 * 10) == 0:
+        if timer_counter % (120 * 5) == 0:
             quit_game()
 
     pygame.display.update()

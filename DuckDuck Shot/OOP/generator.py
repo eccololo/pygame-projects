@@ -15,5 +15,7 @@ class Generator:
             self.game_obj.y_cor = random.randrange(30, 130)
             self.game_object_list.append(self.game_obj)
 
+        return self.game_object_list
+
     def get_game_obj_list(self):
         return self.game_object_list
