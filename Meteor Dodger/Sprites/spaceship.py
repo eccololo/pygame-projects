@@ -2,7 +2,7 @@ import pygame
 
 
 class SpaceShip(pygame.sprite.Sprite):
-    def __init__(self, path, x_pos, y_pos, speed):
+    def __init__(self, path, x_pos, y_pos):
         super().__init__()
         
         # Creating surface

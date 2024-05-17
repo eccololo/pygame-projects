@@ -1,7 +1,8 @@
-import pygame, sys
+import pygame, sys, os
 import random
 from Sprites.spaceship import SpaceShip
 from Sprites.meteor import Meteor
+from Sprites.laser import Laser
 from settings import *
 
 pygame.init()
@@ -11,8 +12,9 @@ clock = pygame.time.Clock()
 # TODO:
 #    1. Create possibility for user to enter his prefered game difficulty in game screen.
 # user_diff_choice = input()
+user_diff_choice = "easy"
 
-spaceship = SpaceShip('./assets/sprites/spaceship.png', 640, 500, 10)
+spaceship = SpaceShip('./assets/sprites/spaceship.png', 640, 500)
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
 
@@ -21,9 +23,7 @@ METEOR_EVENT = pygame.USEREVENT
 pygame.time.set_timer(METEOR_EVENT, DIFFICULTY_LEVEL[user_diff_choice])
 
 meteor_group = pygame.sprite.Group()
-    
-
-print(len(meteor_group))
+laser_group = pygame.sprite.Group()
 
 while True:
     for event in pygame.event.get():
@@ -37,14 +37,20 @@ while True:
             speed_x = random.randrange(-1, 1)
             speed_y = random.randrange(3, 10)
             meteor_group.add(Meteor(meteor_image, random_pos_x, random_pos_y, speed_x, speed_y))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            laser_image = './assets/sprites/Laser.png'
+            laser_group.add(Laser(laser_image, event.pos, 14))
 
     screen.fill((45, 48, 51))
     
     # Sprites
+    laser_group.draw(screen)
+    laser_group.update()
     spaceship_group.draw(screen)
     spaceship_group.update()
     meteor_group.draw(screen)
     meteor_group.update()
+    
 
     pygame.display.update()
     clock.tick(120)
