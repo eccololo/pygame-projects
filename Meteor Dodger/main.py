@@ -1,4 +1,4 @@
-import pygame, sys, os
+import pygame, sys
 import random
 from Sprites.spaceship import SpaceShip
 from Sprites.meteor import Meteor
@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 # user_diff_choice = input()
 user_diff_choice = "easy"
 
-spaceship = SpaceShip('./assets/sprites/spaceship.png', 640, 500)
+spaceship = SpaceShip('./assets/sprites/spaceship.png', './assets/sprites/shield.png', 640, 500)
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
 
