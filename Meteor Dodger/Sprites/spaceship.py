@@ -33,6 +33,4 @@ class SpaceShip(pygame.sprite.Sprite):
 
     def display_health(self):
         for idx, shield in enumerate(range(self.health)):
-            # FIXME:
-            #    1. Find way to import screen to this file and avoid circular import error.
-            screen.blit(self.shiled_surface, (idx * 40 + 10, 10))
+            pygame.display.get_surface().blit(self.shiled_surface, (idx * 40 + 10, 10))
