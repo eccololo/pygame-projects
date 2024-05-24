@@ -34,3 +34,6 @@ class SpaceShip(pygame.sprite.Sprite):
     def display_health(self):
         for idx, shield in enumerate(range(self.health)):
             pygame.display.get_surface().blit(self.shiled_surface, (idx * 40 + 10, 10))
+
+    def get_damage(self, damage_amount):
+        self.health -= damage_amount

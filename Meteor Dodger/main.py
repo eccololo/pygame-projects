@@ -43,14 +43,17 @@ while True:
 
     screen.fill((45, 48, 51))
     
-    # Sprites
+    # Sprites Render
     laser_group.draw(screen)
     laser_group.update()
     spaceship_group.draw(screen)
     spaceship_group.update()
     meteor_group.draw(screen)
     meteor_group.update()
-    
+
+    # Collisions
+    if pygame.sprite.spritecollide(spaceship_group.sprite, meteor_group, True):
+        spaceship_group.sprite.get_damage(1)
 
     pygame.display.update()
     clock.tick(120)
