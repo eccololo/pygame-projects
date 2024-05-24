@@ -9,6 +9,25 @@ pygame.init()
 screen = pygame.display.set_mode((1200, 640))
 clock = pygame.time.Clock()
 
+def main_game():
+    # Sprites Render
+    laser_group.draw(screen)
+    laser_group.update()
+    spaceship_group.draw(screen)
+    spaceship_group.update()
+    meteor_group.draw(screen)
+    meteor_group.update()
+
+    # Collisions
+    if pygame.sprite.spritecollide(spaceship_group.sprite, meteor_group, True):
+        spaceship_group.sprite.get_damage(1)
+
+    for laser in laser_group:
+        pygame.sprite.spritecollide(laser, meteor_group, True)
+
+def end_game():
+    pass
+
 # TODO:
 #    1. Create possibility for user to enter his prefered game difficulty in game screen.
 # user_diff_choice = input()
@@ -42,21 +61,11 @@ while True:
             laser_group.add(Laser(laser_image, event.pos, 14))
 
     screen.fill((45, 48, 51))
-    
-    # Sprites Render
-    laser_group.draw(screen)
-    laser_group.update()
-    spaceship_group.draw(screen)
-    spaceship_group.update()
-    meteor_group.draw(screen)
-    meteor_group.update()
 
-    # Collisions
-    if pygame.sprite.spritecollide(spaceship_group.sprite, meteor_group, True):
-        spaceship_group.sprite.get_damage(1)
-
-    for laser in laser_group:
-        pygame.sprite.spritecollide(laser, meteor_group, True)
+    if spaceship_group.sprite.health > 0:
+        main_game()
+    else:
+        end_game()
 
     pygame.display.update()
     clock.tick(120)
