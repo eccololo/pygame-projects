@@ -6,7 +6,7 @@ from Sprites.laser import Laser
 from settings import *
 
 pygame.init()
-screen = pygame.display.set_mode((1200, 640))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 def main_game():
@@ -26,7 +26,7 @@ def main_game():
         pygame.sprite.spritecollide(laser, meteor_group, True)
 
 def end_game():
-    pass
+    screen.blit(game_font_surface, (SCREEN_WIDTH // 3, SCREEN_HEIGHT // 2))
 
 # TODO:
 #    1. Create possibility for user to enter his prefered game difficulty in game screen.
@@ -36,6 +36,9 @@ user_diff_choice = "easy"
 spaceship = SpaceShip('./assets/sprites/spaceship.png', './assets/sprites/shield.png', 640, 500)
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
+
+game_font = pygame.font.Font(None, 100)
+game_font_surface = game_font.render('Game Over!', True, (255, 255, 255), (45, 48, 51))
 
 # For creating multiple meteors on screen.
 METEOR_EVENT = pygame.USEREVENT
