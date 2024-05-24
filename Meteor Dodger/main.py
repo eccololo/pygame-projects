@@ -26,7 +26,10 @@ def main_game():
         pygame.sprite.spritecollide(laser, meteor_group, True)
 
 def end_game():
-    screen.blit(game_font_surface, (SCREEN_WIDTH // 3, SCREEN_HEIGHT // 2))
+    game_font = pygame.font.Font(None, 100)
+    game_font_surface = game_font.render('Game Over!', True, (255, 255, 255), (45, 48, 51))
+    game_font_rect = game_font_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
+    screen.blit(game_font_surface, game_font_rect)
 
 # TODO:
 #    1. Create possibility for user to enter his prefered game difficulty in game screen.
@@ -37,8 +40,6 @@ spaceship = SpaceShip('./assets/sprites/spaceship.png', './assets/sprites/shield
 spaceship_group = pygame.sprite.GroupSingle()
 spaceship_group.add(spaceship)
 
-game_font = pygame.font.Font(None, 100)
-game_font_surface = game_font.render('Game Over!', True, (255, 255, 255), (45, 48, 51))
 
 # For creating multiple meteors on screen.
 METEOR_EVENT = pygame.USEREVENT
