@@ -60,9 +60,15 @@ while True:
             speed_x = random.randrange(-1, 1)
             speed_y = random.randrange(3, 10)
             meteor_group.add(Meteor(meteor_image, random_pos_x, random_pos_y, speed_x, speed_y))
+        
         if event.type == pygame.MOUSEBUTTONDOWN:
             laser_image = './assets/sprites/Laser.png'
             laser_group.add(Laser(laser_image, event.pos, 14))
+
+        # Game reset function
+        if event.type == pygame.MOUSEBUTTONDOWN and spaceship_group.sprite.health <= 0:
+            spaceship_group.sprite.health = 5
+            meteor_group.empty()
 
     screen.fill((45, 48, 51))
 
