@@ -8,6 +8,7 @@ from settings import *
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
+score = 0
 
 def main_game():
     # Sprites Render
@@ -25,11 +26,18 @@ def main_game():
     for laser in laser_group:
         pygame.sprite.spritecollide(laser, meteor_group, True)
 
+    return 1
+
 def end_game():
     game_font = pygame.font.Font(None, 100)
     game_font_surface = game_font.render('Game Over!', True, (255, 255, 255), (45, 48, 51))
     game_font_rect = game_font_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2))
     screen.blit(game_font_surface, game_font_rect)
+
+    score_font = pygame.font.Font(None, 60)
+    score_font_surface = score_font.render(f'Score: {score}', True, (255, 255, 255), (45, 48, 51))
+    score_font_rect = score_font_surface.get_rect(center=(SCREEN_WIDTH // 2, (SCREEN_HEIGHT // 2) + 70))
+    screen.blit(score_font_surface, score_font_rect)
 
 # TODO:
 #    1. Create possibility for user to enter his prefered game difficulty in game screen.
@@ -69,11 +77,12 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN and spaceship_group.sprite.health <= 0:
             spaceship_group.sprite.health = 5
             meteor_group.empty()
+            score = 0
 
     screen.fill((45, 48, 51))
 
     if spaceship_group.sprite.health > 0:
-        main_game()
+        score += main_game()
     else:
         end_game()
 
