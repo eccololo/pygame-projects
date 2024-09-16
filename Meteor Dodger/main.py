@@ -9,8 +9,12 @@ pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 score = 0
+laser_timer = 0
+laser_active = False
 
 def main_game():
+    global laser_active
+
     # Sprites Render
     laser_group.draw(screen)
     laser_group.update()
@@ -25,6 +29,10 @@ def main_game():
 
     for laser in laser_group:
         pygame.sprite.spritecollide(laser, meteor_group, True)
+
+    # Laser timer
+    if pygame.time.get_ticks() - laser_timer >= 1000:
+        laser_active = True
 
     return 1
 
@@ -69,9 +77,11 @@ while True:
             speed_y = random.randrange(3, 10)
             meteor_group.add(Meteor(meteor_image, random_pos_x, random_pos_y, speed_x, speed_y))
         
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and laser_active:
             laser_image = './assets/sprites/Laser.png'
             laser_group.add(Laser(laser_image, event.pos, 14))
+            laser_active = False
+            laser_timer = pygame.time.get_ticks()
 
         # Game reset function
         if event.type == pygame.MOUSEBUTTONDOWN and spaceship_group.sprite.health <= 0:
