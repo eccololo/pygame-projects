@@ -33,6 +33,7 @@ def main_game():
     # Laser timer
     if pygame.time.get_ticks() - laser_timer >= 1000:
         laser_active = True
+        spaceship_group.sprite.charge()
 
     return 1
 
@@ -82,6 +83,7 @@ while True:
             laser_group.add(Laser(laser_image, event.pos, 14))
             laser_active = False
             laser_timer = pygame.time.get_ticks()
+            spaceship_group.sprite.discharge()
 
         # Game reset function
         if event.type == pygame.MOUSEBUTTONDOWN and spaceship_group.sprite.health <= 0:

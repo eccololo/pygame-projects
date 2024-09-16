@@ -5,8 +5,11 @@ class SpaceShip(pygame.sprite.Sprite):
     def __init__(self, path_spaceship_image, path_shield_image, x_pos, y_pos):
         super().__init__()
         
+        self.discharged = pygame.image.load(path_spaceship_image)
+        self.charged = pygame.image.load("./assets/sprites/spaceship_charged.png")
+
         # Creating surface
-        self.image = pygame.image.load(path_spaceship_image)
+        self.image = self.discharged
         self.shiled_surface = pygame.image.load(path_shield_image)
         # Create rectangle
         self.rect = self.image.get_rect(center=(x_pos, y_pos))
@@ -37,3 +40,9 @@ class SpaceShip(pygame.sprite.Sprite):
 
     def get_damage(self, damage_amount):
         self.health -= damage_amount
+
+    def charge(self):
+        self.image = self.charged
+
+    def discharge(self):
+        self.image = self.discharged
